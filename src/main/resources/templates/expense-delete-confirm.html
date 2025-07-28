@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>支出削除確認</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+	<div class="form-block">
+		<h2 class="section-title">削除確認</h2>
+
+		<p>以下の支出を削除してもよろしいですか？
+		<p><br>
+
+		<table class="data-table">
+			<tr><th>日付</th><td th:text="${expense.date}"></td></tr>
+			<tr><th>メモ</th><td th:text="${expense.memo}"></td></tr>
+			<tr><th>カテゴリ</th><td th:text="${expense.resolvedCategoryName}"></td></tr>
+			<tr><th>感情</th><td th:text="${expense.resolvedFeelingName}"></td></tr>
+			<tr><th>極性</th><td th:text="${polarity == 'positive'} ? 'ポジティブ' : (${polarity == 'negative'} ? 'ネガティブ' : '')"></td></tr>
+			<tr><th>金額</th><td th:text="${expense.amount + '　円'}"></td></tr>
+		</table><br><br>
+
+	<div class="form-button-area">
+		<form th:action="@{/expense-delete/{id}(id=${expense.id})}" method="POST">
+			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+			<input type="submit" value="削除する" class="btn-danger">
+		
+		<br><br>
+		<a th:href="@{/expense-list}" class="btn-cancel">キャンセル</a>
+		</form>
+		</div>
+	</div>
+</body>
+
+</html>

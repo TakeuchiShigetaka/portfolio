@@ -1,0 +1,264 @@
+@charset "UTF-8";
+
+body{
+	font-family: BIZ UDPゴシック; 
+	background-color: #f6f8fa;
+	color: #333;
+	padding: 30px;
+	text-align: center;
+}
+
+.btn {
+	background-color: rgb(190, 211, 123); /* 青 */
+	color: white;
+	padding: 10px 20px;
+	margin: 0;
+	border: none;
+	border-radius: 6px;
+	text-decoration: none;
+	font-weight: bold;
+	cursor: pointer;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+	transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+	background-color: #2563eb; /* hover時：より濃い青 */
+}
+
+.link-button {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  text-decoration: underline;
+  color: #007bff;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 3px;
+}
+
+.form-button-area {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+.btn-danger {
+  background-color: #ff4d4f;
+  color: #fff;
+}
+.btn-danger:hover {
+  background-color: #d9363e;
+}
+
+.btn-cancel {
+  background-color: #eeeeee;
+  color: #444;
+  border: 1px solid #bbb;
+  padding: 3px 6px;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  display: inline-block;
+}
+.btn-cancel:hover {
+  background-color: #cccccc;
+}
+
+.page-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 3px;
+}
+
+.section-title {
+  margin-top: 1px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.month-navigation {
+  gap: 5px;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.current-month {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.emotion-summary-list {
+  list-style: none;
+  padding: 0;
+  text-align: center;
+}
+
+.emotion-summary-list li {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.goal-form {
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto 30px auto; /* ← これで中央寄せ！ */
+  text-align: left;
+}
+
+.form-block {
+  margin: 0 auto;
+   line-height: 0.9;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 12px; /* 入力欄ごとの下余白 */
+  display: flex;
+  flex-direction: column; 
+  gap: 0px; /* ラベルと入力の間の隙間 */
+  align-items: center; 
+  text-align: center;
+  
+}
+
+.form-input,
+.form-select {
+  width: 250px;
+  padding: 8px;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+.total-goal-block {
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  padding: 8px 18px;
+  margin: 8px auto 24px auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.error-msg {
+    color: red;
+}
+
+.summary-section{
+	background: #fff;
+	border-radius: 10px;
+	display: inline-block;
+	text-align: left;
+}
+
+.summary-section ul{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.summary-section li{
+	margin: 8px 0;
+	font-size: 16px;
+}
+
+.table{
+	border-collapse: collapse;
+	margin: 20px auto;
+	width: 60%;
+	background-color: #fff; 
+}
+
+table th, table td{
+	border: 1px solid #ccc;
+	padding: 10px;
+	text-align: center;
+}
+
+table th{
+	background-color: #e9ecef;
+	font-weight: bold;
+}
+
+table tr:nth-child(even){
+	background-color: #f2f2f2;
+}
+
+.goal-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.goal-table th,
+.goal-table td {
+  padding: 6px 8px; /* ← ここを元の10pxから調整 */
+  font-size: 14px;  /* ← フォントサイズも少し小さめに */
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.data-table {
+  width: 70%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  margin: auto;
+}
+
+.data-table th,
+.data-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.expense-list {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto 24px auto; /* 中央寄せ＋下に余白 */
+  border-collapse: collapse;
+  font-size: 16px;
+  background-color: #fdfdfd;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+
+.expense-list th,
+.expense-list td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: center;
+}
+
+.expense-list th {
+  background-color: #f0f0f0;
+  width: 30%;
+}
+
+.expense-list td {
+  background-color: #fff;
+}

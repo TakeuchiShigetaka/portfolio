@@ -19,7 +19,6 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequiredArgsConstructor
 public class AuthController {
-	//※Gitコミットのため追加
 
 	private final UserService userService;
 

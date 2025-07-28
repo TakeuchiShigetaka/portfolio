@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>年間目標と実支出額の比較</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+	<h1 class="page-title">年間目標と実支出額の比較</h1>
+	
+	<!--年選択フォーム-->
+	<form th:action="@{/goals-summary}" method="get" class="form-block">
+		<select name="year" id="year" class="form-select">
+			<option value="">-- 年を選択 --</option>
+			<option th:each="y : ${#numbers.sequence(2020, 2030)}"
+				th:value="${y}"
+				th:text="${y}"
+				th:selected="${y} == ${year}">
+			</option>
+		</select>年
+		<button type="submit" class="btn-primary">表示</button>
+	</form>
+	<br>
+	
+	<h2 class="section-title">年間感情の合計</h2>
+		<ul class="emotion-summary-list">
+			<li>ポジティブ <span th:text="${totalPolarities['positive'] != null ? totalPolarities['positive'] : 0}"></span> 件</li>
+			<li>ネガティブ <span th:text="${totalPolarities['negative'] != null ? totalPolarities['negative'] : 0}"></span> 件</li>
+		</ul>
+	
+	<!--サマリーテーブル-->
+	<table class="goal-table">
+		<thead>
+			<th>月</th>
+			<th>目標額</th>
+			<th>実支出額</th>
+			<th>ポジティブ</th>
+			<th>ネガティブ</th>
+		</thead>
+		<tbody>
+			<tr th:each="summary :${summaryList}">
+				<td th:text="|${summary.month} 月|"></td>
+				<td th:text="${summary.totalGoalAmount != null ? summary.totalGoalAmount + ' 円' : '設定なし'}"></td>
+				<td th:text="${summary.totalExpenseAmount != null ? summary.totalExpenseAmount + ' 円' : '0 円'}"></td>
+				
+				<!--ポジティブ件数-->
+				<td>
+					<span th:if="${monthlyPolarityMap[summary.month] != null}"
+						th:text="${monthlyPolarityMap[summary.month].positiveCount}">0</span>
+					<span th:unless="${monthlyPolarityMap[summary.month] != null}">0</span>
+				</td>
+				
+				<!--ネガティブ件数-->
+				<td>
+					<span th:if="${monthlyPolarityMap[summary.month] != null}"
+						th:text="${monthlyPolarityMap[summary.month].negativeCount}">0</span>
+					<span th:unless="${monthlyPolarityMap[summary.month] != null}">0</span>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<br>
+	<a th:href="@{/monthly-goal}" class="link-button">月別目標額に戻る</a>
+	
+
+</body>
+</html>

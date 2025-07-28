@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>支出修正確認</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+	<h2 class="page-title">修正内容の確認</h2>
+	
+	
+	<table class="table">
+		<tr>
+			<th>項目</th>
+			<th>修正前</th>
+			<th>修正後</th>
+		</tr>
+		<tr>
+			<td>日付</td>
+			<td th:text="${before.date}"></td>
+			<td th:text="${after.date}"></td>
+		</tr>
+		<tr>
+			<td>メモ</td>
+			<td th:text="${before.memo}"></td>
+			<td th:text="${after.memo}"></td>
+		</tr>
+		<tr>
+			<td>カテゴリ</td>
+			<td th:text="${before.resolvedCategoryName}"></td>
+			<td th:text="${after.resolvedCategoryName}"></td>
+		</tr>
+		<tr>
+			<td>感情</td>
+			<td th:text="${before.resolvedFeelingName}"></td>
+			<td th:text="${after.resolvedFeelingName}"></td>
+		</tr>
+		<tr>
+			<td>極性</td>
+			<td th:text="${beforePolarity}"></td>
+			<td th:text="${afterPolarity}"></td>
+		</tr>
+		<tr>
+			<td>金額</td>
+			<td th:text="${before.amount + '　円'}"></td>
+			<td th:text="${after.amount + '　円'}"></td>
+		</tr>
+	</table>
+	
+	<br>
+	<form th:action="@{/expense-edit-save/{id}(id=${expenseId})}" method="POST">
+		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+		
+		<input type="hidden" name="date" th:value="${after.date}">
+		<input type="hidden" name="memo" th:value="${after.memo}">
+		<input type="hidden" name="categoryId" th:value="${after.categoryId}">
+		<input type="hidden" name="categoryIsDefault" th:value="${after.categoryIsDefault}">
+		<input type="hidden" name="feelingId" th:value="${after.feelingId}">
+		<input type="hidden" name="feelingIsDefault" th:value="${after.feelingIsDefault}">
+		<input type="hidden" name="amount" th:value="${after.amount}">
+		
+		<input type="submit" value="この内容で更新する" class="btn">
+	</form>
+	<br><br><br>
+	<a th:href="@{/expense-list}" class="btn">キャンセル</a>
+
+</body>
+</html>

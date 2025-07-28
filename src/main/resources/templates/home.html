@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ホーム画面</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+	
+		<h1 class="page-title">こんにちは、[[${user.name}]]さん！</h1>
+		<br>
+		<br>
+
+		<!-- 成功メッセージ -->
+		<div th:if="${successMessage}" class="error-msg">
+			<p th:text="${successMessage}"></p>
+		</div>
+
+		<div class="summary-section">
+			<h2>[[${summary.year}]]年[[${summary.month}]]月のサマリー</h2>
+			<ul>
+				<li>目標額：[[${summary.goalAmount != null ? summary.goalAmount + ' 円' : '設定なし' }]]</li>
+				<li>実支出：[[${summary.totalExpense != null ? summary.totalExpense + ' 円' : '0 円'}]]</li>
+				<li>ポジティブ感情：[[${summary.positiveCount}]] 件</li>
+				<li>ネガティブ感情：[[${summary.negativeCount}]] 件</li>
+			</ul>
+		</div><br>
+
+
+		<a th:href="@{/monthly-goal}" class="btn">目標支出額の設定</a><br><br>
+		<a th:href="@{/expense-new}" class="btn">支出を記録する</a><br><br>
+		<a th:href="@{/category-manage}" class="btn">カテゴリ項目を管理する</a><br><br>
+		<a th:href="@{/feeling-manage}" class="btn">感情項目を管理する</a><br><br>
+		<a th:href="@{/expense-list}" class="btn">記録の履歴を見る</a><br><br>
+
+		<form th:action="@{/logout}" method="POST">
+			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+			<input type="submit" value="ログアウト" class="btn">
+
+		</form><br>
+</body>
+
+</html>

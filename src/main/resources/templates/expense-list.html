@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>支出一覧</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+	<h2 class="section-title">[[${user.name}]]さんの</h2>
+	<h3 class="section-title" th:text="${targetYear} + '年' + ${targetMonth} + '月の支出'"></h3>
+
+	<!-- 月切り替えボタン -->
+	<div class="month-navigation">
+		<a th:href="@{/expense-list(year=${targetMonth == 1 ? targetYear - 1 : targetYear},
+								  month=${targetMonth == 1 ? 12 : targetMonth - 1})}">＜前月</a>
+
+		<a th:href="@{/expense-list(year=${targetMonth == 12 ? targetYear + 1 : targetYear},
+								  month=${targetMonth == 12 ? 1 : targetMonth + 1})}">翌月＞</a>
+	</div>
+	
+	<!-- サマリー表示 -->
+	<div class="form-block">
+		<h4 th:text="${summary.year} + '年' + ${summary.month} + '月のサマリー'"></h4>
+		<p th:text="'目標額：' + (${summary.goalAmount != null ? summary.goalAmount : 0}) + ' 円'"></p>
+		<p th:text="'実支出：' + (${summary.totalExpense != null ? summary.totalExpense : 0}) + ' 円'"></p>
+		<p th:text="'ポジティブ感情：' + ${summary.positiveCount} + ' 件'"></p>
+		<p th:text="'ネガティブ感情：' + ${summary.negativeCount} + ' 件'"></p>
+	</div>
+	
+	<!-- 成功メッセージ -->
+	<div th:if="${successMessage}" class="error-msg">
+		<p th:text="${successMessage}"></p>
+	</div>
+
+	<table class="data-table">
+		<tbody>
+			<tr>
+				<th>日付</th>
+				<th>金額</th>
+				<th>カテゴリ</th>
+				<th colspan="2">感情</th>
+				<th>メモ</th>
+				<th colspan="2">操作</th>
+			</tr>
+
+			<!-- 支出がないとき -->
+			<th:block th:if="${expenses.isEmpty()}">
+				<tr>
+					<td colspan="8" style="text-align:center;">記録がありません</td>
+				</tr>
+			</th:block>
+
+
+			<!-- 支出があるとき -->
+			<th:block th:unless="${expenses.isEmpty()}">
+				<tr th:each="dto : ${expenses}">
+					<td th:text="${dto.expense.date}"></td>
+					<td th:text="${dto.expense.amount} + '円'"></td>
+					<td th:text="${dto.categoryName}"></td>
+					<td th:text="${dto.feelingName}"></td>
+					<td th:text="${dto.polarity == 'positive'} ? 'ポジティブ' : (${dto.polarity == 'negative'} ? 'ネガティブ' : '' )"></td>
+					<td th:text="${dto.expense.memo}"></td>
+					<td>
+						<a th:href="@{/expense-edit/{id}(id=${dto.expense.id})}">修正</a> 
+					</td>
+					<td>
+						<a th:href="@{expense-delete-confirm/{id}(id=${dto.expense.id})}">削除</a>
+					</td>
+				</tr>
+			</th:block>
+		</tbody>
+
+	</table>
+
+	<br>
+	<a th:href="@{/expense-list}">当月に戻る</a>
+
+	<br><br>
+	<a th:href="@{expense-cancel}">ホーム画面に戻る</a>
+
+</body>
+
+</html>

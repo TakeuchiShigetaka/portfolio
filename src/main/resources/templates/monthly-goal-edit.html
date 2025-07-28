@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+ <title>月別目標額設定</title>
+ <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <h1 class="page-title">月別目標額設定</h1>
+	
+	<!--年月ナビゲーション-->
+	<div class="month-navigation">
+	<a th:href="@{monthly-goal(year=${year == 1 ? year -1 : year}, month=${month == 1 ? 12 : month -1})}">前月</a>
+	<span  class="current-month" th:text="${year} + '年' + ${month} + '月'"></span>
+	<a th:href="@{monthly-goal(year=${month == 12 ? year +1 : year}, month=${month == 12 ? 1 : month +1})}">先月</a>
+	</div>
+	
+	<form th:action="@{monthly-goal}" method="POST" th:object="${form}" class="goal-form">
+	
+		<input type="hidden" th:field="*{year}">
+		<input type="hidden" th:field="*{month}">
+		
+		<!--合計目標額-->
+		<div class="total-goal-block">
+		<h2 class="section-title">月全体の目標額</h2>
+	
+			【目標額】 <br>
+			<span th:text="*{totalGoalAmount == null|| totalGoalAmount == 0} ? '設定なし' : *{totalGoalAmount} + ' 円'"></span><br> 
+			<input type="number" th:field="*{totalGoalAmount}" placeholder="例:50000"> 円
+		</div>
+			
+		<!--カテゴリ別目標額-->
+		<h2 class="section-title">カテゴリ別の目標額</h2>
+		<table  class="goal-table"	border="1">
+			<thead>
+				<th>カテゴリ名</th>
+				<th>設定額（円）</th>
+			</thead>
+			<tbody>
+				<tr th:each="catGoal, iterStat : *{categoryGoals}">
+				<td th:text="${catGoal.categoryName}"></td>
+				<td>
+					<!--設定なし表示-->
+					<span th:text="${catGoal.goalAmount == null || catGoal.goalAmount == 0} ? '設定なし' : ${catGoal.goalAmount} + ' 円'"></span><br>
+					
+					<!--入力フォーム-->
+					<input type="number" th:field="*{categoryGoals[__${iterStat.index}__].goalAmount}" placeholder="0">
+					<input type="hidden" th:field="*{categoryGoals[__${iterStat.index}__].categoryId}">
+					<input type="hidden" th:field="*{categoryGoals[__${iterStat.index}__].default}">
+				</td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<br>
+		<div class="button-container">
+		<button type="submit" class="btn">保存する</button>
+		</div>
+		
+		<br><br>
+		<a th:href="@{/goals-summary(year=${year})}">▶ 年間目標と支出の比較ページ︎</a><br><br>
+		<a th:href="@{/home}">ホームへ戻る</a>
+		
+	</form>
+</body>
+</html>

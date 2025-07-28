@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>支出入力画面</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+	<h2 class="section-title">支出入力画面</h2>
+
+	<form th:action="@{/expense-confirm}" method="POST" th:object="${expenseForm}" class="form-block">
+		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+		<div class="form-group">
+			<label>【日付】</label><br>
+			<input type="date" th:field="*{date}" class="form-input">
+			<div th:if="${#fields.hasErrors('date')}" th:errors="*{date}" class="error-msg"></div>
+		</div>
+		<div class="form-group">
+			<label>【メモ】</label><br>
+			<input type="text" th:field="*{memo}" class="form-input">
+			<div th:if="${#fields.hasErrors('memo')}" th:errors="*{memo}" class="error-msg"></div>
+		</div>
+		<div class="form-group">
+			<label>【カテゴリ】</label><br>
+			<select th:field="*{categoryId}" class="form-select">
+				<option value="">-- 選択してください --</option>
+				<option th:each="cat : ${categories}" th:value="${cat.id}"
+					th:text="${cat.name + (cat.isDefault ? '(共通)' : '')}">
+				</option>
+			</select>
+			<div th:if="${#fields.hasErrors('categoryId')}" th:errors="*{categoryId}" class="error-msg"></div>
+		</div>
+		<div class="form-group">
+			<label>【感情】</label><br>
+					<select th:field="*{feelingId}" class="form-select">
+						<option value="">-- 選択してください --</option>
+						<option th:each="feel : ${feelings}" th:value="${feel.id}"
+							th:text="${feel.name + (feel.isDefault ? '(共通)' : '')}">
+						</option>
+					</select>
+					<div th:if="${#fields.hasErrors('feelingId')}" th:errors="*{feelingId}" class="error-msg"></div>
+		</div>
+		<div class="form-group">
+			<label>【金額】</label><br>
+					<input type="number" th:field="*{amount}" class="form-input">　円
+					<div th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}" class="error-msg"></div>
+					</div>
+
+						<div class="form-button-area">
+							<input type="submit" value="支出確認画面へ" class="btn">
+						</div>
+
+	</form>
+	<div class="form-button-area">
+		<a th:href="@{/expense-cancel}">ホーム画面に戻る</a>
+	</div>
+
+</body>
+
+</html>

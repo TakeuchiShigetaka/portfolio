@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>エラー</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<h2>エラー</h2>
+<br>
+<p class="error-msg">エラーが発生しました。</p>
+<p class="error-msg" th:text= "${status} + '　' + ${error}"></p>
+<br>
+<form>
+<a th:href="@{/home}">ホーム画面に戻る</a>
+<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+</form>
+
+</body>
+</html>
