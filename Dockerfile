@@ -8,7 +8,7 @@ COPY . .
 RUN mvn clean package -Dmaven.test.skip=true
 
 #新しいビルドステージの開始
-FROM eclipse-temurin:17-alpine
+FROM eclipse-temurin:17-jdk
 
 #前のビルドステージからビルドされたjarファイル(kakeibo-app.jar)を新しいビルドステージにコピー
 COPY --from=build /target/kakeibo-app-0.0.1-SNAPSHOT.jar kakeibo-app.jar
