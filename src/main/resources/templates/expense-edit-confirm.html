@@ -37,8 +37,8 @@
 		</tr>
 		<tr>
 			<td>極性</td>
-			<td th:text="${beforePolarity}"></td>
-			<td th:text="${afterPolarity}"></td>
+			<td th:text="${beforePolarity == 'positive'} ? 'ポジティブ' : (${beforePolarity == 'negative'} ? 'ネガティブ' : '')"></td>
+			<td th:text="${afterPolarity == 'positive'} ? 'ポジティブ' :(${afterPolarity == 'negative'} ? 'ネガティブ' : '')"></td>
 		</tr>
 		<tr>
 			<td>金額</td>
@@ -46,6 +46,8 @@
 			<td th:text="${after.amount + '　円'}"></td>
 		</tr>
 	</table>
+	${feel.polarity == 'positive'} ? 'ポジティブ' : (${feel.polarity == 'negative'} ? 'ネガティブ' : '')
+	
 	
 	<br>
 	<form th:action="@{/expense-edit-save/{id}(id=${expenseId})}" method="POST">
