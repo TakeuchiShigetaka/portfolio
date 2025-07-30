@@ -215,7 +215,7 @@ public class ExpenseController {
 		Expense expense = expenseService.findByIdAndUser(id, user);
 
 		if (expense == null) {
-			return "reirect:/expense-list";
+			return "redirect:/expense-list";
 		}
 
 		ExpenseForm form = new ExpenseForm();
