@@ -8,6 +8,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.Form.LoginRequestForm;
 import com.example.demo.Form.RegisterUserForm;
@@ -37,7 +38,8 @@ public class AuthController {
 	//新規登録処理
 	@PostMapping("/register")
 	public String processRegister(@Validated @ModelAttribute RegisterUserForm form,
-			BindingResult result) {
+			BindingResult result,
+			RedirectAttributes redirectAttributes) {
 		// 登録処理は後述のServiceで実行
 		if (result.hasErrors()) {
 			return "register";
@@ -56,6 +58,8 @@ public class AuthController {
 		user.setPasswordHash(form.getPassword());
 
 		userService.register(user); //DB登録
+		
+		redirectAttributes.addFlashAttribute("successMessage", "新規ユーザー登録しました。");
 
 		return "redirect:/login";
 
