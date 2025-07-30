@@ -71,7 +71,7 @@ public class ExpenseController {
 		model.addAttribute("categories", categories);
 		model.addAttribute("feelings", feelings);
 
-		return "/expense-form";
+		return "expense-form";
 
 	}
 
