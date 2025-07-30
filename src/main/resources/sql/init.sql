@@ -1,13 +1,13 @@
 -- テーブル定義
 
-DROP TABLE IF EXISTS users CASCADE;
-DROP TABLE IF EXISTS default_categories CASCADE;
-DROP TABLE IF EXISTS user_categories CASCADE;
-DROP TABLE IF EXISTS default_feelings CASCADE;
-DROP TABLE IF EXISTS user_feelings CASCADE;
-DROP TABLE IF EXISTS expenses CASCADE;
-DROP TABLE IF EXISTS monthly_goals CASCADE;
-DROP TABLE IF EXISTS monthly_category_goals CASCADE;
+--DROP TABLE IF EXISTS users CASCADE;
+--DROP TABLE IF EXISTS default_categories CASCADE;
+--DROP TABLE IF EXISTS user_categories CASCADE;
+--DROP TABLE IF EXISTS default_feelings CASCADE;
+--DROP TABLE IF EXISTS user_feelings CASCADE;
+--DROP TABLE IF EXISTS expenses CASCADE;
+--DROP TABLE IF EXISTS monthly_goals CASCADE;
+--DROP TABLE IF EXISTS monthly_category_goals CASCADE;
 
 -- users テーブル
 -- kakeibo_db.users definition
