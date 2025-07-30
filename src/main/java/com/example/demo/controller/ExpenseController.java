@@ -198,6 +198,7 @@ public class ExpenseController {
 
 		HomeSummaryDto summary = homeSummaryService.getSummary(user, targetYear, targetMonth);
 		model.addAttribute("summary", summary);
+		model.addAttribute("expenses", expenses);
 		model.addAttribute("expenses", expenseDtos);
 		model.addAttribute("targetYear", targetYear);
 		model.addAttribute("targetMonth", targetMonth);
