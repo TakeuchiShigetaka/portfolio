@@ -48,7 +48,7 @@ public class AuthController {
 		//パスワードと確認用パスワードが一致するか確認
 		if (!form.getPassword().equals(form.getConfirmPassword())) {
 			result.rejectValue("confirmPasswor", "error.confirmPassword", "パスワードが一致しません。");
-			return "/register";
+			return "register";
 		}
 
 		//DTO → Entity へ変換

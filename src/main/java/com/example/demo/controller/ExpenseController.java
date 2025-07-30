@@ -102,7 +102,7 @@ public class ExpenseController {
 			feelings.addAll(FeelingDisplayDto.fromUserFeelings(feelingService.findByUser(user)));
 			feelings.addAll(FeelingDisplayDto.fromDefaultFeelings(defaultFeelingService.findAll()));
 
-			return "/expense-form";
+			return "expense-form";
 		}
 
 		//カテゴリと感情名を取得
@@ -116,7 +116,7 @@ public class ExpenseController {
 		model.addAttribute("feelingName", feelingName);
 		model.addAttribute("expenseForm", form);
 
-		return "/expense-confirm";
+		return "expense-confirm";
 
 	}
 
@@ -357,7 +357,7 @@ public class ExpenseController {
 
 			model.addAttribute("categories", categories);
 			model.addAttribute("feelings", feelings);
-			return "/expense-edit-form";
+			return "expense-edit-form";
 		}
 
 		Expense expense = expenseService.findByIdAndUser(id, user);
@@ -409,7 +409,7 @@ public class ExpenseController {
 		User user = userService.findByEmail(userDetails.getUsername());
 		Expense expense = expenseService.findByIdAndUser(id, user);
 		if (expense == null) {
-			return "/expense-list";
+			return "expense-list";
 		}
 
 		String polarity;
@@ -425,7 +425,7 @@ public class ExpenseController {
 
 		model.addAttribute("expense", expense);
 		model.addAttribute("polarity", polarity);
-		return "/expense-delete-confirm";
+		return "expense-delete-confirm";
 	}
 
 	//削除実行
