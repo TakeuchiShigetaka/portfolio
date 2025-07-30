@@ -102,7 +102,7 @@ public class ExpenseController {
 			feelings.addAll(FeelingDisplayDto.fromUserFeelings(feelingService.findByUser(user)));
 			feelings.addAll(FeelingDisplayDto.fromDefaultFeelings(defaultFeelingService.findAll()));
 
-			return "expense-form";
+			return "redirect:/expense-form";
 		}
 
 		//カテゴリと感情名を取得
@@ -129,17 +129,11 @@ public class ExpenseController {
 		//ログイン中のユーザー情報取得
 		User user = userService.findByEmail(userDetails.getUsername());
 
-		//IDに応じてUserCategoryまたはコピーされたカテゴリを取得
-		//カテゴリ一覧を取得（ログインした人が登録したものだけ）default_のidならコピーしてくる
-		//		UserCategory category = categoryService.resolveOrCopy(user, form.getCategoryId());
-
+		//VIEWより渡されたIDから登録したいカテゴリオブジェクトを取得
 		UserCategory userCategory = categoryService.findByUserAndId(user, form.getCategoryId());
 		boolean isDefaultCategory = (userCategory == null);
 
-		//IDに応じてUserFeelingまたはコピーされたカテゴリを取得
-		//感情一覧を取得（ログインした人が登録したものだけ）default_のidならコピーしてくる
-		//		UserFeeling feeling = feelingService.resolveOrCopy(user, form.getFeelingId());
-
+		//VIEWより渡されたIDから登録したい感情オブジェクトを取得
 		UserFeeling userFeeling = feelingService.findByUserAndId(user, form.getFeelingId());
 		boolean isDefaultFeeling = (userFeeling == null);
 
@@ -221,7 +215,7 @@ public class ExpenseController {
 		Expense expense = expenseService.findByIdAndUser(id, user);
 
 		if (expense == null) {
-			return "return:/expense-list";
+			return "reirect:/expense-list";
 		}
 
 		ExpenseForm form = new ExpenseForm();
@@ -270,7 +264,7 @@ public class ExpenseController {
 			
 			model.addAttribute("categories", categories);
 			model.addAttribute("feelings", feelings);
-			return "expense-edit-form";
+			return "redirect:/expense-edit-form";
 		}
 		
 		//修正前の支出を取得
@@ -290,7 +284,6 @@ public class ExpenseController {
 		
 		boolean isCategoryIsDefault = categoryService.findByUserAndId(user, form.getCategoryId()) == null;
 		boolean isFeelingIsDefault = feelingService.findByUserAndId(user, form.getFeelingId()) == null;
-//		String polarity = feelingService.getFeelingPolarityByIdIncludingDefault(form.getFeelingId(), isFeelingIsDefault);
 		
 		//VIEW表示のためカテゴリ、感情オブジェクトを取得
 		if(isCategoryIsDefault) {
@@ -357,7 +350,7 @@ public class ExpenseController {
 
 			model.addAttribute("categories", categories);
 			model.addAttribute("feelings", feelings);
-			return "expense-edit-form";
+			return "redirect:/expense-edit-form";
 		}
 
 		Expense expense = expenseService.findByIdAndUser(id, user);
@@ -409,7 +402,7 @@ public class ExpenseController {
 		User user = userService.findByEmail(userDetails.getUsername());
 		Expense expense = expenseService.findByIdAndUser(id, user);
 		if (expense == null) {
-			return "expense-list";
+			return "reirect:/expense-list";
 		}
 
 		String polarity;
