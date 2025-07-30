@@ -102,7 +102,7 @@ public class ExpenseController {
 			feelings.addAll(FeelingDisplayDto.fromUserFeelings(feelingService.findByUser(user)));
 			feelings.addAll(FeelingDisplayDto.fromDefaultFeelings(defaultFeelingService.findAll()));
 
-			return "redirect:/expense-form";
+			return "expense-form";
 		}
 
 		//カテゴリと感情名を取得
@@ -264,7 +264,7 @@ public class ExpenseController {
 			
 			model.addAttribute("categories", categories);
 			model.addAttribute("feelings", feelings);
-			return "redirect:/expense-edit-form";
+			return "expense-edit-form";
 		}
 		
 		//修正前の支出を取得
@@ -350,7 +350,7 @@ public class ExpenseController {
 
 			model.addAttribute("categories", categories);
 			model.addAttribute("feelings", feelings);
-			return "redirect:/expense-edit-form";
+			return "expense-edit-form";
 		}
 
 		Expense expense = expenseService.findByIdAndUser(id, user);
