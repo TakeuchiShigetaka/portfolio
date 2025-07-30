@@ -402,7 +402,7 @@ public class ExpenseController {
 		User user = userService.findByEmail(userDetails.getUsername());
 		Expense expense = expenseService.findByIdAndUser(id, user);
 		if (expense == null) {
-			return "reirect:/expense-list";
+			return "redirect:/expense-list";
 		}
 
 		String polarity;
