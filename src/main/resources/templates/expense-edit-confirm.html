@@ -46,8 +46,6 @@
 			<td th:text="${after.amount + '　円'}"></td>
 		</tr>
 	</table>
-	${feel.polarity == 'positive'} ? 'ポジティブ' : (${feel.polarity == 'negative'} ? 'ネガティブ' : '')
-	
 	
 	<br>
 	<form th:action="@{/expense-edit-save/{id}(id=${expenseId})}" method="POST">
